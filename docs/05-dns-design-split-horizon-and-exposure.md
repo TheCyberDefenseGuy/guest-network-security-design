@@ -196,7 +196,7 @@ These risks directly align with:
 
 ### Key Rule for Guest Networks:
 
-> Guest DNS should answer only what is absolutely required — nothing more.
+> Guest DNS should answer only what is absolutely required, nothing more.
 
 Treat split-horizon DNS as a **temporary, tightly scoped exception**, not a standard design pattern, in untrusted wireless environments.
 
