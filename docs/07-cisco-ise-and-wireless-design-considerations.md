@@ -2,7 +2,7 @@
 
 ## Cisco ISE Guest is not just a portal
 
-ISE Guest introduces:
+### ISE Guest introduces:
 - DNS dependencies
 - Certificate dependencies
 - Redirect flows
@@ -14,7 +14,7 @@ Cisco ISE Guest is often perceived as a simple **captive portal**, but in realit
 
 Treating ISE Guest as “just a portal” leads to fragile designs, DNS leakage, and unintended trust exposure.
 
-**What Cisco ISE Guest Actually Introduces:**
+### What Cisco ISE Guest Actually Introduces:
 
 - **DNS dependencies**  
   Guest clients must resolve specific FQDNs for portal redirection, authentication, and post-authentication flows. Improper DNS design can expose internal zones or enable reconnaissance.
@@ -28,7 +28,7 @@ Treating ISE Guest as “just a portal” leads to fragile designs, DNS leakage,
 - **Firewall exceptions**  
   Guest traffic must be explicitly permitted to reach ISE services, DNS resolvers, and sometimes external identity providers. Overly broad exceptions increase the attack surface.
 
-**Security Implications in Guest Networks:**
+### Security Implications in Guest Networks:
 
 Each of these dependencies represents a **potential reconnaissance and abuse vector** if not tightly controlled:
 
@@ -37,7 +37,7 @@ Each of these dependencies represents a **potential reconnaissance and abuse vec
 - Certificate trust misuse leaks internal infrastructure
 - Firewall misconfigurations expand blast radius
 
-**Guest-Focused Design Principle:**
+### Guest-Focused Design Principle:
 
 > Cisco ISE Guest should be treated as a **security-integrated service**, not a standalone portal.
 
@@ -48,7 +48,7 @@ A secure guest deployment requires:
 - Strong client isolation
 - Continuous validation of redirect behavior
 
-**Key Takeaway:**
+### Key Takeaway:
 
 In guest networks, **every dependency introduced by ISE must be intentionally designed and constrained**. Failure to do so turns the guest network into a reconnaissance platform rather than a controlled access environment.
 
@@ -63,7 +63,7 @@ In guest networks, **every dependency introduced by ISE must be intentionally de
 
 Misconfigurations in **Cisco ISE Guest** deployments frequently undermine the security of guest networks. These risks often stem from treating the guest portal as a simple access feature rather than a tightly controlled security service.
 
-**High-Risk Patterns:**
+### High-Risk Patterns:
 
 - **Portal FQDN resolves to an internal IP**  
   When the guest portal FQDN resolves to internal (RFC1918) addresses, guest clients gain visibility into internal addressing schemes. This enables passive reconnaissance and weakens network segmentation.
@@ -77,7 +77,7 @@ Misconfigurations in **Cisco ISE Guest** deployments frequently undermine the se
 - **No validation of client isolation**  
   Assuming client isolation is enabled without verification can allow guest devices to communicate with each other, enabling lateral movement and peer reconnaissance.
 
-**Security Impact:**
+### Security Impact:
 
 These misconfigurations directly support adversary activity related to:
 - **TA0043 – Reconnaissance**
@@ -86,11 +86,11 @@ These misconfigurations directly support adversary activity related to:
 
 Attackers can leverage these weaknesses to map internal infrastructure, identify exposed services, and prepare follow-on attacks from an untrusted network.
 
-**Guest Network Security Principle:**
+### Guest Network Security Principle:
 
 > If a configuration exists only to “make the portal work,” it must be reviewed for security impact.
 
-**Mitigation Guidance:**
+### Mitigation Guidance:
 
 - Ensure portal FQDNs resolve only to **guest-accessible IPs**
 - Use **dedicated guest DNS resolvers**
@@ -98,7 +98,7 @@ Attackers can leverage these weaknesses to map internal infrastructure, identify
 - Actively test and validate **client isolation behavior**
 - Monitor DNS and portal access logs for abuse patterns
 
-**Key Takeaway:**
+### Key Takeaway:
 
 Cisco ISE Guest deployments fail most often due to **assumptions**, not limitations. A secure guest network requires continuous validation of DNS, routing, isolation, and access controls.
 
@@ -114,7 +114,7 @@ Cisco ISE Guest deployments fail most often due to **assumptions**, not limitati
 
 A secure **Cisco ISE Guest** deployment relies on clear trust boundaries and intentional design. These principles help ensure guest access remains functional while minimizing reconnaissance and attack opportunities.
 
-**Core Security Principles:**
+### Core Security Principles:
 
 - **Publicly trusted certificates**  
   Use certificates issued by a public Certificate Authority. This avoids exposing internal PKI infrastructure and prevents trust dependencies between guest devices and internal systems.
@@ -131,7 +131,7 @@ A secure **Cisco ISE Guest** deployment relies on clear trust boundaries and int
 - **Logging and visibility**  
   DNS queries, portal access, authentication events, and policy decisions must be logged and monitored to detect abuse, reconnaissance, and misconfiguration.
 
-**Security Alignment:**
+### Security Alignment:
 
 When applied consistently, these principles reduce exposure related to:
 - **TA0043 – Reconnaissance**
@@ -140,7 +140,7 @@ When applied consistently, these principles reduce exposure related to:
 
 They also support **defense-in-depth** by combining network controls, identity enforcement, and telemetry.
 
-**Guest Network Design Mindset:**
+### Guest Network Design Mindset:
 
 > Guest access is a controlled exception, not an extension of the internal network.
 
