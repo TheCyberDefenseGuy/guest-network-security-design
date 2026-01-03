@@ -2,14 +2,14 @@
 
 ## DNS is reconnaissance
 
-**DNS leaks:**
+### DNS leaks:
 - Internal naming
 - Service structure
 - Identity systems (SRV records)
 
 In **guest networks**, DNS is one of the **primary reconnaissance mechanisms** available to attackers. Because guest environments are designed for open access and minimal trust, DNS often becomes the most reliable source of intelligence about the network and its surroundings.
 
-**Guest clients typically have:**
+### Guest clients typically have:
 - No authentication or weak identity enforcement
 - Limited network access controls
 - Broad internet connectivity
@@ -17,7 +17,7 @@ In **guest networks**, DNS is one of the **primary reconnaissance mechanisms** a
 
 This makes DNS an ideal, low-friction channel for reconnaissance.
 
-**Why DNS Is Especially Valuable in Guest Networks:**
+### Why DNS Is Especially Valuable in Guest Networks:
 
 - **Allowed by design**  
   DNS must function for guests to access the internet, making it difficult to block without breaking usability.
@@ -31,7 +31,7 @@ This makes DNS an ideal, low-friction channel for reconnaissance.
 - **Recon without direct interaction**  
   Attackers can enumerate assets without scanning IP ranges or touching internal systems.
 
-**Common Guest-Focused DNS Reconnaissance Activities:**
+### Common Guest-Focused DNS Reconnaissance Activities:
 
 - Subdomain brute-forcing of public domains
 - Discovery of externally exposed applications
@@ -39,7 +39,7 @@ This makes DNS an ideal, low-friction channel for reconnaissance.
 - Enumeration of email and authentication infrastructure (MX, TXT, SPF, DKIM)
 - Detection of misconfigurations such as split-horizon DNS leakage
 
-**Relation to MITRE ATT&CK:**
+### Relation to MITRE ATT&CK:
 
 DNS-based reconnaissance in guest networks maps primarily to:
 - **TA0043 – Reconnaissance**
@@ -58,11 +58,11 @@ In guest networks, DNS should be treated as a **high-risk but unavoidable servic
 
 Effective guest network security requires **governing DNS usage**, not simply allowing it by default.
 
-**Defensive Considerations:**
+### Defensive Considerations:
 
 In **guest networks**, DNS reconnaissance is especially relevant because clients are typically **untrusted** and may include compromised or malicious devices. Defensive controls should prioritize **visibility, containment, and abuse prevention** rather than trust-based access.
 
-Key defensive considerations for guest environments include:
+### Key defensive considerations for guest environments include:
 
 - **Restrict DNS resolution paths**  
   Force guest clients to use **approved DNS resolvers only** (e.g., internal recursive resolvers or secure public DNS). Block direct DNS queries to arbitrary external resolvers.
@@ -112,7 +112,7 @@ Using the same DNS for Guest and internal:
 
 Using the **same internal DNS infrastructure for both Guest and internal networks** is a common but high-risk anti-pattern. While it may simplify operations, it fundamentally breaks security boundaries and increases exposure.
 
-**Why This Is a Problem:**
+### Why This Is a Problem:
 
 - **Breaks trust separation**  
   Guest networks are inherently untrusted. Allowing guest clients to query internal DNS violates the trust model and exposes internal services to unknown devices.
@@ -123,7 +123,7 @@ Using the **same internal DNS infrastructure for both Guest and internal network
 - **Enables enumeration attacks**  
   Internal DNS often contains rich information such as hostnames, service records, and naming conventions. Guest access enables attackers to enumerate internal systems without scanning the network.
 
-**Security Impact:**
+### Security Impact:
 
 This anti-pattern significantly strengthens adversary capabilities related to:
 - **TA0043 – Reconnaissance**
@@ -136,7 +136,7 @@ Attackers can use DNS responses to:
 - Plan targeted phishing or credential abuse
 - Prepare follow-on attacks from outside the network
 
-**Recommended Approach:**
+### Recommended Approach:
 
 - Use **dedicated DNS resolvers** for Guest networks
 - Restrict DNS responses to **internet-only resolution**
@@ -144,7 +144,7 @@ Attackers can use DNS responses to:
 - Apply strict logging and rate limiting
 - Combine with **Client Isolation and egress controls**
 
-**Key Takeaway:**
+### Key Takeaway:
 
 DNS is not just a utility service. In guest networks, it is a **powerful reconnaissance channel**. Sharing internal DNS with untrusted clients creates unnecessary risk and undermines defense-in-depth principles.
 
@@ -161,7 +161,7 @@ Correct use:
 
 In **guest networks**, split-horizon DNS is acceptable **only as a minimal exception** to support required services such as captive portals. Any broader use introduces unnecessary risk and directly enables reconnaissance.
 
-**When Split-Horizon DNS Is Acceptable:**
+### When Split-Horizon DNS Is Acceptable:
 
 Split-horizon DNS should be used **only** when strictly required for guest access functionality:
 
@@ -174,7 +174,7 @@ Split-horizon DNS should be used **only** when strictly required for guest acces
 - **Dedicated guest DNS resolvers**  
   Guest networks must use DNS resolvers that are fully separated from internal DNS infrastructure.
 
-**What to Avoid:**
+### What to Avoid:
 
 In guest environments, split-horizon DNS must **not** be used to:
 - Provide access to internal applications
@@ -182,7 +182,7 @@ In guest environments, split-horizon DNS must **not** be used to:
 - Expose naming conventions or service metadata
 - Simplify operations at the cost of trust boundaries
 
-**Security Impact:**
+### Security Impact:
 
 Misconfigured split-horizon DNS in guest networks enables:
 - Passive DNS reconnaissance
@@ -194,7 +194,7 @@ These risks directly align with:
 - **TA0043 – Reconnaissance**
 - **TA0007 – Discovery**
 
-**Key Rule for Guest Networks:**
+### Key Rule for Guest Networks:
 
 > Guest DNS should answer only what is absolutely required — nothing more.
 
